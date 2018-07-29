@@ -1,0 +1,20 @@
+from pandas import Series,DataFrame
+import pandas as pd
+import openpyxl
+pd.set_option('display.max_columns', None)
+
+
+file = raw_input('Enter location/name of file ')
+sheet = raw_input('Enter sheet name you wish to sort ')
+file2 = pd.read_excel(file,sheet,indexcol=0, navalues=['NA'])
+
+sorter = []
+style =[]
+sort = int(raw_input("Please enter no. of  column you wish to sort by: "))
+for x in range(sort):
+    sorter.append(raw_input(('Name of columns you wish to sort by ' + 'x+1' + ' ')))
+    style.append(raw_input(('Type True for Ascending, False for Descending sort ' + 'x+1' + ' ')))
+sort1= file2.sort(sorter,ascending=(style))
+
+destwb = raw_input('Enter destination and filename you wish to store as ')
+sort1.to_excel(destwb, sheet_name='Sheet1')
